@@ -3,14 +3,14 @@ import requests
 import json
 import mysql.connector
 
-db = mysql.connector.connect(
-  host="localhost",
-  user="root",
-  passwd="rahul!",
-  database="testdatabase"
-)
+# db = mysql.connector.connect(
+#   host="localhost",
+#   user="root",
+#   passwd="rahul!",
+#   database="testdatabase"
+# )
 
-mycursor = db.cursor()
+# mycursor = db.cursor()
 
 apiKey ='d44cc6dc'
 url = 'https://entertainment.aa.com/en/film/results/15114-15117-Allmoviesvariesbyaircraft?orderBy=titleasc&previousPageId=1051'
@@ -53,6 +53,7 @@ with open('movies.html') as html_file:
 # 				VALUES (%(Title)s, %(Year)s, %(Rated)s, %(Released)s, %(Runtime)s, %(Genre)s, %(Director)s, %(Writer)s, %(Actors)s %(Plot)s, %(Language)s, %(Country)s, %(Awards)s, %(Poster)s, %(Ratings)s, %(Metascore)s, %(imdbRating)s, %(imdbVotes)s, %(imdbID)s, %(Type)s, %(DVD)s, %(BoxOffice)s, %(Production)s, %(Website)s, %(Response)s, %(Airline)s))'''row_tuple
 
 iter_count = 0
+source_names = ['Internet Movie Database', 'Rotten Tomatoes', 'Metacritic']
 for index in range(0, len(movies_int_dict)):
 	movie_index = movies_int_dict[index]
 	insert_movie_dict = movies_dict[movie_index]
@@ -65,50 +66,32 @@ for index in range(0, len(movies_int_dict)):
 		if type(meta_property) == list:
 			source_properties = []
 			for item in meta_property:
-				source_names = ['Internet Movie Database', 'Rotten Tomatoes', 'Metacritic']
-				index = 0;
 				if type(item) == dict:
-					for element in item:
-						if element not in source_names:
-							while index < len(source_names):
-								if element == source_names[index]:
-									source_properties.append(element)
-									source_properties.append('N/A')
-								else:			
-									source_properties.append(element)
-									source_properties.append(item[element])
-								index += 1
-			
-		# elif type(meta_property) == dict:
-		# 	source_names = ['Internet Movie Database', 'Rotten Tomatoes', 'Metacritic']
-		# 	source_properties = []
-		# 	index = 0;
-		# 	for item in meta_property:
-		# 		if item not in source_names:
-		# 			while index < len(source_names):
-		# 				if item == source_names[index]:
-		# 					source_properties.append(item)
-		# 					source_properties.append('N/A')
-		# 		else:			
-		# 			source_properties.append(item)
-		# 			source_properties.append(meta_property[item])
+					for element in item.values():
+						try:
+							int(element[0])
+						except ValueError:
+							source_properties.append(element)
+							source_properties.append(item['Value'])
+			for name in source_names:
+				if name not in source_properties:
+					source_properties.append(name)
+					source_properties.append('N/A')
 			row_list.extend(source_properties)
 		else:
 			row_list.append(meta_property)
 	row_tuple = tuple(row_list)
-	print(row_tuple)
 	input_format = '''INSERT INTO omdb_sql
 				(Title, Year, Rated, Released, Runtime, Genre, Director, Writers, Actors, Plot, Language, Country, Awards, Poster, imd, imdVal, Rotten, RottenVal, Meta, MetaVal, Metascore, imdbRating, imdbVotes, imdbID, Type, DVD, BoxOffice, Production, Website, Response, Airline) 
 				VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'''
-	print(iter_count)
-	mycursor.execute(input_format, row_tuple)
+	# mycursor.execute(input_format, row_tuple)
 g = open("test.txt", 'w')
 g.write(str(row_tuple))
 
-mycursor.close()
-db.close()
-sql_file = open("C:/Users/Srinivasa/Documents/MovieProject/movie.sql", "a")
-sql_file.write(sql + '\n')
+# mycursor.close()
+# db.close()
+# sql_file = open("C:/Users/Srinivasa/Documents/MovieProject/movie.sql", "a")
+# sql_file.write(sql + '\n')
 
 
 def index():
