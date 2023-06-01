@@ -4,7 +4,11 @@ in which users can search by multiple parameters, inclusive with genre and airli
 Elasticsearch and implement the Search UI using React or Python as I need great help on being able to build React components.
 
 Done
-
+- Item 1
+- Item 2
+- Item 3
+  - Sub Item 1
+  - Sub Item 2
 -Built universal webscraper for airline entertainment catalogs
 -Able to ingest data into Elastic Cluster and make REST API calls
 -Able to filter data from Elastic Cluster using REST API calls 
