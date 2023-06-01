@@ -44,19 +44,17 @@ Refer to OMDB API to understand the values of the parameters if not understandab
   -  "Awards": "3 wins & 21 nominations", 
   -  "Poster": "https://m.media-amazon.com/images/M/MV5BMTQwMDU4MDI3MV5BMl5BanBnXkFtZTcwMjU1NDgyOQ@@._V1_SX300.jpg", 
   - "Ratings": 
-        - [
-        - {"Source": "Internet Movie Database", "Value": "7.5/10"}, 
-        - {"Source": "Rotten Tomatoes", "Value": "81%"}, 
-        - {"Source": "Metacritic", "Value": "62/100"}
-        - ], 
+   - [{"Source": "Internet Movie Database", "Value": "7.5/10"}, 
+   - {"Source": "Rotten Tomatoes", "Value": "81%"}, 
+   - {"Source": "Metacritic", "Value": "62/100"}]
   - "Metascore": "62", 
   - "imdbRating": "7.5", 
   - "imdbVotes": "98,394", 
-   "imdbID": "tt0453562", 
-   "Type": "movie", 
-   "DVD": "16 Jul 2013", 
-   "BoxOffice": "$95,059,709", 
-   "Production": "N/A", 
-   "Website": "N/A", 
-   "Response": "True", 
-   "Airline": ["AA"]}
+  - "imdbID": "tt0453562", 
+  - "Type": "movie", 
+  - "DVD": "16 Jul 2013", 
+  - "BoxOffice": "$95,059,709", 
+  - "Production": "N/A", 
+  - "Website": "N/A", 
+  - "Response": "True", 
+  - "Airline": ["AA"]}
